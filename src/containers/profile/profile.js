@@ -31,11 +31,8 @@ export default class Profile extends Component {
 	render(){
 		return (
 			<div className="container">
-				PROFILE
-				<ProfileList />
-				{console.log(this.state.profiles)}
+				<ProfileList profiles={this.state.profiles} />
 			</div>
-
 		);
 	}
 }
