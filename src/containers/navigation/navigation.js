@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
-import AppBar from 'material-ui/AppBar';
+import { Link } from 'react-router';
 
+// Material-UI
+import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
-import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
+
+// Icons
+import ActionHome from 'material-ui/svg-icons/action/home';
+import IconFace from 'material-ui/svg-icons/action/face';
+
 
 export default class Navigation extends Component {
 
@@ -15,7 +21,6 @@ export default class Navigation extends Component {
 	}
 
 	handleToggle = () => this.setState({open: !this.state.open});
-
 	handleClose = () => this.setState({open: false});
 
 	render(){
@@ -31,8 +36,19 @@ export default class Navigation extends Component {
 					open={this.state.open}
 					onRequestChange={(open) => this.setState({open})}
 					>
-					<MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-					<MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
+
+					<MenuItem
+						containerElement={<Link to="/" />}
+						onTouchTap={this.handleClose}
+						primaryText="Home"
+						leftIcon={<ActionHome />}
+					/>
+					<MenuItem
+						containerElement={<Link to="/profile" />}
+						onTouchTap={this.handleClose}
+						primaryText="Profiles"
+						leftIcon={<IconFace />}
+					/>
 				</Drawer>
 				
 				{this.props.children}
