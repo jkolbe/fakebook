@@ -4,7 +4,7 @@ import ProfileCard from './profile-card';
 
 const ProfileList = (props) => (
 	<div>
-		<h1>ProfileList</h1>
+		<h1>Profile List:</h1>
 		{props.profiles.map((p, index) => <ProfileCard 
 			key={`profile-${index}`} 
 			index={index}

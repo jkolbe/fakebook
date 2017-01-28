@@ -27,7 +27,7 @@ export default class Navigation extends Component {
 		return (
 			<div>
 				<AppBar
-					title="Title"
+					title="FakeBook"
 					onLeftIconButtonTouchTap={this.handleToggle}
 				/>
 				<Drawer

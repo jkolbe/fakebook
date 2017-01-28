@@ -8,6 +8,10 @@ body {
 	margin: 50px 70px;
 }
 
+.profile-card {
+	margin-bottom: 20px;
+}
+
 .profile-card-header {
 	position: relative;
 }
