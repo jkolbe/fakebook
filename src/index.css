@@ -7,3 +7,16 @@ body {
 .container {
 	margin: 50px 70px;
 }
+
+.profile-card-header {
+	position: relative;
+}
+
+.profile-card-icon {
+	position: absolute;
+	right: 16px;
+	top: 16px;
+	vertical-align: middle;
+	width: 25px !important; height: 25px !important;
+	cursor: pointer;
+}
