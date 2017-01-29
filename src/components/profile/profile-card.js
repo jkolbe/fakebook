@@ -10,7 +10,7 @@ const ProfileCard = ({
 	photo,
 	age,
 	gender,
-	favorites,
+	isFavorite,
 	addToFavorites,
 	removeFromFavorites,
 }) => (
@@ -21,18 +21,17 @@ const ProfileCard = ({
 				title={name}
 				subtitle={`Age: ${age}  |  Gender: ${gender}`}
 				avatar={photo} >
-				<IconFavoriteFalse 
+
+				{
+					isFavorite ?
+					<IconFavoriteTrue 
+						className="profile-card-icon"
+						onClick={()=>removeFromFavorites(index)} /> : 
+					<IconFavoriteFalse 
 						className="profile-card-icon"
 						onClick={()=>addToFavorites(index)} />
-				{
-				favorites.indexOf(index) > -1 ?
-				<IconFavoriteTrue 
-					className="profile-card-icon"
-					onClick={()=>removeFromFavorites(index)} /> :
-				<IconFavoriteFalse 
-					className="profile-card-icon"
-					onClick={()=>addToFavorites(index)} />
 				}
+				
 			</CardHeader>
 		</Card>
 	</div>

@@ -12,7 +12,7 @@ const ProfileList = (props) => (
 			photo={p.photo}
 			age={p.age}
 			gender={p.gender}
-			favorites={props.favorites}
+			isFavorite={p.isFavorite}
 			addToFavorites={props.addToFavorites}
 			removeFromFavorites={props.removeFromFavorites}
 		/>)}
