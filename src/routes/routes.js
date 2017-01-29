@@ -9,7 +9,7 @@ const Routes = () => (
 	<Router history={browserHistory}>
 		<Route path="" component={Nav}>
 			<Route path="/" component={Home}/>
-			<Route path="/profile" component={Profile}/>
+			<Route path="/profile" component={Profile} />
 		</Route>
 	</Router>
 );

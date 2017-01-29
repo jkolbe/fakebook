@@ -2,28 +2,25 @@ import React, {Component} from 'react';
 import $ from 'jquery';
 
 import ProfileList from '../../components/profile/profile-list';
+import TextField from 'material-ui/TextField';
 
 export default class Profile extends Component {
 	
 	URL_BASE = 'http://uinames.com/api/';
 
-	constructor(props) {
+	constructor() {
 		super();
 		
 		this.state = {
 			profiles : [],
-			favoriteProfiles: [],
 			maxPages : 4,
-			favorites: [1,3,6],
-			isFavoritesScreen: props.location.query.favorites
-		};
-
-		console.log(this.state.isFavoritesScreen);
-
-		
+			searchString : "",
+			searchResults: []
+		};		
 
 		this.addToFavorites = this.addToFavorites.bind(this);
 		this.removeFromFavorites = this.removeFromFavorites.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 	}
 
 	getProfiles() {
@@ -32,12 +29,6 @@ export default class Profile extends Component {
 				profiles : [...this.state.profiles, ...res]
 			})}
 		);
-	}
-
-	getFavoritesProfiles(){
-		const favprofiles = this.state.profiles.filter((p,index)=>this.state.favorites.indexOf(index) > -1);
-		console.log(favprofiles);
-		
 	}
 
 	addToFavorites(profileIndex){
@@ -64,22 +55,32 @@ export default class Profile extends Component {
 		});
 	}
 
+	handleChange(event) {
+    	const value = event.target.value;
+    	this.setState({
+    		searchString: value,
+    		searchResults: this.state.profiles.filter(p => (`${p.name} ${p.surname}`).toLowerCase().includes(value))
+    	})
+  	}
+
 	componentDidMount() {
 		this.getProfiles();
-		if(this.state.isFavoritesScreen){
-			this.getFavoritesProfiles();
-		}
 	}
 
-	render(){
+	render(){		
 		return (
 			<div className="container">
 
+				<TextField
+					hintText="Enter name or surname"
+					floatingLabelText="Search"
+					onChange={this.handleChange}
+				/>
+
 				<ProfileList 
-					profiles={this.state.isFavoritesScreen ? this.state.profiles : this.state.profiles} 
+					profiles={this.state.searchString ? this.state.searchResults : this.state.profiles} 
 					removeFromFavorites={this.removeFromFavorites} 
 					addToFavorites={this.addToFavorites} />
-
 			</div>
 		);
 	}
