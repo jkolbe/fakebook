@@ -3,6 +3,7 @@ import $ from 'jquery';
 
 import ProfileList from '../../components/profile/profile-list';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class Profile extends Component {
 	
@@ -13,7 +14,8 @@ export default class Profile extends Component {
 		
 		this.state = {
 			profiles : [],
-			maxPages : 4,
+			maxPages : 3,
+			currentPage : 0,
 			searchString : "",
 			searchResults: []
 		};		
@@ -26,7 +28,8 @@ export default class Profile extends Component {
 	getProfiles() {
 		$.get(`${this.URL_BASE}?ext&amount=10&region=canada`).then(
 			(res) => { this.setState({
-				profiles : [...this.state.profiles, ...res]
+				profiles : [...this.state.profiles, ...res],
+				currentPage : this.state.currentPage+1
 			})}
 		);
 	}
@@ -81,6 +84,14 @@ export default class Profile extends Component {
 					profiles={this.state.searchString ? this.state.searchResults : this.state.profiles} 
 					removeFromFavorites={this.removeFromFavorites} 
 					addToFavorites={this.addToFavorites} />
+
+				<RaisedButton 
+					label={this.state.currentPage >= this.state.maxPages ? "That's enough!" : 'Load more...'}
+					secondary={true} 
+					style={{margin: '20px 0'}} 
+					disabled={this.state.currentPage >= this.state.maxPages}
+					onClick={() => this.getProfiles()}/>
+			
 			</div>
 		);
 	}
